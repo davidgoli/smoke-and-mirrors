@@ -137,7 +137,7 @@ export default Component.extend({
     if (!this.alwaysUseDefaultHeight) {
       this.element.style[heightProp] = null;
     }
-    this.element.style.visibility = 'visible';
+    this.element.style.visibility = 'inherit';
   },
 
   _hasRealHeight: false,
