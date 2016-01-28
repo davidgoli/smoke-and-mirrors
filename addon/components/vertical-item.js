@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import layout from '../templates/components/vertical-item';
+import getOwner from 'ember-getowner-polyfill';
 
 const {
   Component
@@ -228,7 +229,13 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    this.registry = this.container.lookup('-view-registry:main') || Ember.View.views;
+
+    let owner = getOwner(this);
+    if (owner === null) {
+      owner = this.container;
+    }
+
+    this.registry = owner.lookup('-view-registry:main') || Ember.View.views;
     let tag = this.get('itemTagName');
 
     this.set('tagName', tag);
